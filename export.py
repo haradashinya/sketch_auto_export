@@ -20,7 +20,7 @@ def out(str):
     print(str)
     sys.stdout.flush()
 
-def findModified(before, after):
+def find_modified(before, after):
     modified = []
     for (bf,bmod) in before.items():
         if (after[bf] and after[bf] > bmod):
@@ -53,7 +53,7 @@ def export(watch,output):
       after = dict ((f, os.path.getmtime(f)) for f in find_files(INPUT_PATH))
       added = [f for f in after.keys() if not f in before.keys()]
       removed = [f for f in before.keys() if not f in after.keys()]
-      modified = findModified(before,after)
+      modified = find_modified(before,after)
       if added: out("Added: " + ", ".join (added))
       if removed: out("Removed: " + ", ".join (removed))
       if modified: out("Changed: " + ", ".join (modified))
